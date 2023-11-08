@@ -1,4 +1,5 @@
 # Aplicación de Flutter: Widgets profesionales con Material 3 y Riverpod
+
 Se implementan widgets profesionalizados que son de uso habitual en aplicaciones reales. También se implementa la configuración de rutas. Se utilizará el gestor de estado Riverpod.
 
 ## Contenido de la aplicación
@@ -16,9 +17,9 @@ Se implementan widgets profesionalizados que son de uso habitual en aplicaciones
   - InfiniteScroll
   - ProgresIndicators
 
-      - Lineales
-      - Circulares
-      - Controlados
+    - Lineales
+    - Circulares
+    - Controlados
 
   - Animaciones
   - Snackbars
@@ -31,14 +32,14 @@ Se implementan widgets profesionalizados que son de uso habitual en aplicaciones
 
 - **Rutas**
 
-  - Propias de Flutter
+  - Propias de Flutter (Navigator)
   - Go_Router
   - Paths
   - Configuraciones de router
 
     - Propio
     - De terceros
-   
+
 - **Drawers** (menús laterales)
 
 - Gestor de estado **Riverpod** (muy popular y considerado el sucesor espiritual del gestor de estado **Provider**)
