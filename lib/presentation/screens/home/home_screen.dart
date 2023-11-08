@@ -3,6 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:widgets_riverpod_app/config/menu/menu_items.dart';
 
 class HomeScreen extends StatelessWidget {
+
+  static const String name = 'home_screen'; // ! Usado para poder recordar el nombre de la ruta del widget sin tener que irnos al app_router.dart
+
   const HomeScreen({super.key});
 
   @override
@@ -63,7 +66,8 @@ class _CustomListTile extends StatelessWidget {
 
         // ? Go_router
         // context.go(menuItem.link); // Para app webs mejor esto
-        context.push(menuItem.link);
+        // context.pushNamed(ButtonsScreen.name); context.pushNamed(menuItem.name); // Para navegar con nombre de rutas, tendriamos que añadir al menu items el 'name' de la ruta como opcion
+        context.push(menuItem.link); // Para navigating to a route based on the URL, es decir, el path
       },
     );
   }
