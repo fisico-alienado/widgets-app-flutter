@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:widgets_riverpod_app/config/menu/menu_items.dart';
-import 'package:widgets_riverpod_app/presentation/screens/buttons/buttons_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -51,14 +51,19 @@ class _CustomListTile extends StatelessWidget {
       subtitle: Text(menuItem.subTitle),
       trailing: Icon(Icons.arrow_forward_ios_rounded, color: colors.primary),
       onTap: (){
-        // ! Forma valida pero mejor con rutas
+        // * Si usamos 'Navigator'
+        // ? Forma valida pero mejor con rutas
         // Navigator.of(context).push(
         //   MaterialPageRoute(
         //     builder: (context) => const ButtonsScreen()
         //   )
         // );
+        // ? la mejor forma
+        // Navigator.pushNamed(context, menuItem.link);
 
-        Navigator.pushNamed(context, menuItem.link);
+        // ? Go_router
+        // context.go(menuItem.link); // Para app webs mejor esto
+        context.push(menuItem.link);
       },
     );
   }
