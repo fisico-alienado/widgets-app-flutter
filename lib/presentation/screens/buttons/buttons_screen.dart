@@ -60,7 +60,32 @@ class _ButtonsView extends StatelessWidget {
                 iconColor: const MaterialStatePropertyAll(Colors.white)
               )
             ),
+            const CustomButton()
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class CustomButton extends StatelessWidget {
+  const CustomButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    final colors = Theme.of(context).colorScheme;
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: Material( // ! Sirve para darle formato de la librería Material 3 a nuestros widgets
+        color: colors.primary,
+        child: InkWell( // ! Para darle efecto al botón cuando se pulsa
+          onTap: () {},
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Text('Botón personalizado', style: TextStyle(color: Colors.white)),
+          ),
         ),
       ),
     );
