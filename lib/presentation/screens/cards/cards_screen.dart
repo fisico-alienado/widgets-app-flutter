@@ -45,9 +45,20 @@ class _CardsView extends StatelessWidget {
           ...cards.map( // ! con ... podemos hacer un spread dentro del widget, que nos permite devolver elementos iterables en el orden en el que están definidos
             (card) => _CardType1(elevation: card['elevation'], label: card['label'])
           ),
+          const SizedBox(height: 50), // para dejar espacio
           ...cards.map(
             (card) => _CardType2(elevation: card['elevation'], label: card['label'])
           ),
+          const SizedBox(height: 50), // para dejar espacio
+          ...cards.map(
+            (card) => _CardType3(elevation: card['elevation'], label: card['label'])
+          ),
+          const SizedBox(height: 50), // para dejar espacio
+          ...cards.map(
+            (card) => _CardType4(elevation: card['elevation'], label: card['label'])
+          ),
+
+          const SizedBox(height: 100) // para dejar espacio y que no este pegado al final de la pantalla
         ],
       ),
     );
@@ -133,6 +144,92 @@ class _CardType2 extends StatelessWidget {
             )
           ]),
       ),
+    );
+  }
+}
+
+class _CardType3 extends StatelessWidget {
+
+  final String label;
+  final double elevation;
+
+  const _CardType3({
+    required this.label, 
+    required this.elevation
+    });
+
+  @override
+  Widget build(BuildContext context) {
+
+    final colors = Theme.of(context).colorScheme;
+
+    return Card(
+      color: colors.surfaceVariant,
+      elevation: elevation, // hace que podamos ver el color de la tarjeta (cuanto mayor el valor mas se ve el color)
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: IconButton(
+                icon: const Icon(Icons.more_vert_outlined),
+                onPressed: (){},
+              )
+            ),
+
+            Align(
+              alignment: Alignment.bottomLeft,
+              
+              child: Text('$label - filled'),
+            )
+          ]),
+      ),
+    );
+  }
+}
+
+class _CardType4 extends StatelessWidget {
+
+  final String label;
+  final double elevation;
+
+  const _CardType4({
+    required this.label, 
+    required this.elevation
+    });
+
+  @override
+  Widget build(BuildContext context) {
+
+    final colors = Theme.of(context).colorScheme;
+
+    return Card(
+      clipBehavior: Clip.hardEdge,
+      elevation: elevation, // hace que podamos ver el color de la tarjeta (cuanto mayor el valor mas se ve el color)
+      child: Stack(
+        children: [
+
+          Image.network(
+            'https://picsum.photos/id/${ elevation.toInt() }/600/500',
+            height: 350,
+            fit: BoxFit.cover, // fit: como queremos que la imagen se adapte a su espacio
+          ),
+
+          Align(
+            alignment: Alignment.topRight,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20))
+              ),
+              child: IconButton(
+                icon: const Icon(Icons.more_vert_outlined),
+                onPressed: (){},
+              ),
+            )
+          ),
+        ]),
     );
   }
 }
