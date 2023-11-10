@@ -45,7 +45,7 @@ class _CustomListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-        final colors = Theme.of(context).colorScheme; // Esto significa: vete para atras en los widgets padres hasta que encuentres el Theme y aplicalo. Para esto esta el argumento "BuildContext context" en todos los Widgets
+    final colors = Theme.of(context).colorScheme; // Esto significa: vete para atras en los widgets padres hasta que encuentres el Theme y aplicalo. Para esto esta el argumento "BuildContext context" en todos los Widgets
                                                   // con .colorScheme accedemos a todo lo definido en AppTheme()
 
     return ListTile( // Widget estilizado especialmente usado con listas (si termina en 'Tile' es 'widget que le aplica estilo a')
