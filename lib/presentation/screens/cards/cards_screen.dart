@@ -202,8 +202,6 @@ class _CardType4 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final colors = Theme.of(context).colorScheme;
-
     return Card(
       clipBehavior: Clip.hardEdge,
       elevation: elevation, // hace que podamos ver el color de la tarjeta (cuanto mayor el valor mas se ve el color)
