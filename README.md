@@ -15,7 +15,7 @@ Se implementan widgets profesionalizados que son de uso habitual en aplicaciones
   - Align
   - RefreshIndicator
   - InfiniteScroll
-  - ProgresIndicators
+  - Progress Indicators
 
     - Lineales
     - Circulares
