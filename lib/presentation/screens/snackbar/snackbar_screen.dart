@@ -9,7 +9,7 @@ class SnackbarScreen extends StatelessWidget {
 
   void showCustomSnackbar( BuildContext context){
 
-    ScaffoldMessenger.of(context).clearSnackBars(); // ! Clave para que aunque toquemos el boton de snackbar muchas veces no se vuelva loco y borre el anterior snackbar
+    ScaffoldMessenger.of(context).clearSnackBars(); // ! Clave para que borre el anterior snackbar y aunque toquemos el boton de snackbar muchas veces no se vuelva loco y cree infinitos
 
     final snackBar = SnackBar(
       content: const Text('Hola Mundo'),

@@ -8,6 +8,28 @@ class AnimatedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold( // Poniendo Scaffold ya estamos indicando que es otra pantalla
+      appBar: AppBar(
+        title: const Text('Animated Container'),
+      ),
+      body: Center(
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 400),
+          curve: Curves.easeOutCubic,
+          width: 300,
+          height: 230,
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            borderRadius: BorderRadius.circular(20)
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.play_arrow_rounded),
+        onPressed: () {
+
+        },
+      ),
+    );
   }
 }
