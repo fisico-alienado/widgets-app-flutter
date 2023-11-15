@@ -26,7 +26,7 @@ Se implementan widgets profesionalizados que son de uso habitual en aplicaciones
   - Diálogos
   - Licencias
   - Switches, Checkboxes, Radios
-  - Tiles
+  - Tiles (ExpansionTile, SwitchListTile, etc)
   - Listas
   - Pageviews
 
