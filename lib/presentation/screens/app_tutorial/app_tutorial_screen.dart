@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -32,11 +33,41 @@ final slides = <SlideInfo>[ // ! Es como menu_items.dart
 
 ];
 
-class AppTutorialScreen extends StatelessWidget {
+class AppTutorialScreen extends StatefulWidget {
 
   static const name = 'tutorial_screen';
-
+  // ! Stateful en vez de Stateless porque asi tenemos un widget que puede mantener un estado (con estado nos referimos a las propiedades que queremos animar). 
+  // ! Mejor solucion que utilizar un gestor de estado para esta funcionalidad, que sería otra opción  
   const AppTutorialScreen({super.key});
+
+  @override
+  State<AppTutorialScreen> createState() => _AppTutorialScreenState();
+}
+
+class _AppTutorialScreenState extends State<AppTutorialScreen> {
+
+  final PageController pageviewController = PageController();
+  bool endReached = false;
+
+  @override
+  void initState() {
+    super.initState();
+    pageviewController.addListener(() {
+      // print('${pageviewController.page}'); // solo para debuggear y ver como las paginas cargan de la 0.0 a la 2.0 y los valores que toma en las transiciones
+      final page = pageviewController.page ?? 0; // ! null safety
+      if(!endReached && page >= (slides.length - 1.5)){ // -1.5 por que hay tres imagenes, entonces con 1.5 decimos que cuando el usuario deslice hasta la mitad de la tercera imagen (3 - 1.5 = 1.5), se cambie el estado de una variable
+        setState(() { // ! FUNCION QUE ACTUALIZA LOS (stateful) WIDGETS, QUE REENDERIZA LOS WIDGETS de nuevo
+          endReached = true; // * OJO ya se queda con valor true permanentemente hasta que salgamos el widget del tutorial
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    pageviewController.dispose(); // ! Obligatorio en los Stateful widgets el ir liberando memoria y recursos según se dejan de usar
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +76,7 @@ class AppTutorialScreen extends StatelessWidget {
       body: Stack(
         children: [
           PageView(
+            controller: pageviewController,
             physics: const BouncingScrollPhysics(),
             children: [ // ! Parecido a 'cards_screen.dart'
               ...slides.map( // ! con ... podemos hacer un spread dentro del widget, que nos permite devolver elementos iterables en el orden en el que están definidos
@@ -66,14 +98,31 @@ class AppTutorialScreen extends StatelessWidget {
 
           ),
 
-          Positioned(
+          // * Condicion ternaria para mostrarlo o no
+          endReached ? 
+          const SizedBox() // ! SizeBox() es lo que se suele poner cuando no podemos devolver un 'null' y hay que devolver un widget vacio que no haga nada
+          : Positioned(
             right: 20,
             top: 50,
             child: ElevatedButton(
               child: const Text('Salir'), 
               onPressed: () => context.pop()
+            ),
+          ),
+
+          endReached ? Positioned(
+            bottom: 30,
+            right: 30,
+            child: FadeInRight(
+              from: 30,
+              delay: const Duration(seconds: 1),
+              child: FilledButton(
+                child: const Text('Fin del tutorial'), 
+                onPressed: () => context.pop()
+              ),
             )
-          )
+          ) : const SizedBox(),
+
         ],
       ),
     );
