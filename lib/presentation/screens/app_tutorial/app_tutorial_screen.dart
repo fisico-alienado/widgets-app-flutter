@@ -59,7 +59,7 @@ class AppTutorialScreen extends StatelessWidget {
       //         imageUrl: slideData.imageUrl
       //       )
       //     ).toList()
-      
+
       ),
     );
   }
@@ -79,6 +79,15 @@ class _Slide extends StatelessWidget { // ! Se esta haciendo de esta manera para
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      child: Center(
+        child: Column(
+          children: [
+            Image.asset(imageUrl)
+          ],
+        ),
+      ),
+    );
   }
 }
