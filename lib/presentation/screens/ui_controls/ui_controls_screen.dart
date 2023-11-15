@@ -13,12 +13,6 @@ class UiControlsScreen extends StatelessWidget {
         title: const Text('UI Controls'),
       ),
       body: const _UiControlsView(),
-      // floatingActionButton: FloatingActionButton(
-      //   child: const Icon(Icons.arrow_back_ios_new_rounded),
-      //   onPressed: () {
-
-      //   },
-      // ),
     );
   }
 }
