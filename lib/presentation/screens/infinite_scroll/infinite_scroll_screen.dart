@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -54,6 +55,8 @@ class _InfiniteScrollScreenState extends State<InfiniteScrollScreen> {
     // ! Esto hay que hacerlo en TODOS los lugares donde la petición sea 'async'. En este caso, la llamada las imagenes https//...
     if(!isMounted) return; // salte de la carga de imagenes si el widget no esta montado, es decir, si el usuario ha empezado a cargar imagenes pero ha decidido salirse antes de que termine
     setState(() {}); // ! FUNCION QUE ACTUALIZA LOS (stateful) WIDGETS, QUE REENDERIZA LOS WIDGETS de nuevo
+
+    // todo: mover el scroll
   }
 
   void addFiveImages() {
@@ -100,10 +103,21 @@ class _InfiniteScrollScreenState extends State<InfiniteScrollScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.arrow_back_ios_new_rounded),
+        child: isLoading ?
+               const CircularProgressIndicator()
+               : FadeIn(child: const Icon(Icons.arrow_back_ios_new_rounded)),
+        // ? Otra forma con el paquete de Fernando Herrera
+        // child: isLoading ?
+        //        SpinPerfect(                  
+        //           infinite: true,
+        //           child: const Icon(Icons.refresh_rounded),
+        //         )
+        //        : FadeIn(child: const Icon(Icons.arrow_back_ios_new_rounded)),
         onPressed: () {
-          context.pop(); // ! Para volver a la pantalla anterior. Esta es la forma de hacerlo con Go Router
-          // Navigator.of(context).pop(...) // * Si usamos 'Navigator'
+          if(!isLoading){ // toque personal: que el usuario no pueda salirse mientras se cargan imagenes
+            context.pop(); // ! Para volver a la pantalla anterior. Esta es la forma de hacerlo con Go Router
+            // Navigator.of(context).pop(...) // * Si usamos 'Navigator'
+          }
         },
       ),
     );
