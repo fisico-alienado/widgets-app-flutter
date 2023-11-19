@@ -54,7 +54,7 @@ class _UiControlsViewState extends State<_UiControlsView> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return ListView( // * va a mantener en memoria un listado fijo de widgets en tiempo de compilación en vez de ejecución (eso sería con el .builder(), que se utiliza para mostrar widgets on demand)
       physics: const ClampingScrollPhysics(), // evita el efecto de rebote de la lista
       children: [
         SwitchListTile( // si termina en 'Tile' es 'widget que le aplica estilo a')
