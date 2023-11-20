@@ -52,10 +52,9 @@ class _InfiniteScrollScreenState extends State<InfiniteScrollScreen> {
     setState(() {}); // esto permite añadir/dibujar un loading o algo similar en la pantalla para indicar al usuario que se esta cargando
     await Future.delayed(const Duration(seconds: 2));
 
-    // addFiveImages();
-    // setState(() {}); // ! FUNCION QUE ACTUALIZA LOS (stateful) WIDGETS, QUE REENDERIZA LOS WIDGETS de nuevo
-    addFiveImagesAsync();
-    isLoading = false; // * devolverlo a false para la siguiente carga
+    // addFiveImages();   
+    isLoading = await addFiveImagesAsync(); // * devolverlo a false para la siguiente carga
+    setState(() {}); // ! FUNCION QUE ACTUALIZA LOS (stateful) WIDGETS, QUE REENDERIZA LOS WIDGETS de nuevo
 
     // todo: mover el scroll
   }
@@ -86,7 +85,7 @@ class _InfiniteScrollScreenState extends State<InfiniteScrollScreen> {
     //-----------------------------------------------
   }
 
-  Future<void> addFiveImagesAsync() async {
+  Future<bool> addFiveImagesAsync() async {
     final lastId = imagesIds.last;
     for (int i = 1; i <= 5; i++) {
       int nextId = lastId + i;
@@ -94,7 +93,7 @@ class _InfiniteScrollScreenState extends State<InfiniteScrollScreen> {
       nextId = await checkImageExists(imageUrl, nextId);
       imagesIds.add(nextId);
     }
-    setState(() {}); // ! FUNCION QUE ACTUALIZA LOS (stateful) WIDGETS, QUE REENDERIZA LOS WIDGETS de nuevo
+    return false;
   }
 
   Future<void> onRefresh() async {    
@@ -107,8 +106,7 @@ class _InfiniteScrollScreenState extends State<InfiniteScrollScreen> {
     imagesIds.clear();
     imagesIds.add(lastId + 1);
     // addFiveImages();
-    addFiveImagesAsync();
-    isLoading = false; // * devolverlo a false para la siguiente carga
+    isLoading = await addFiveImagesAsync(); // * devolverlo a false para la siguiente carga
     setState(() {}); // ! FUNCION QUE ACTUALIZA LOS (stateful) WIDGETS, QUE REENDERIZA LOS WIDGETS de nuevo  
   }
 
