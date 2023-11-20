@@ -28,8 +28,8 @@ class _InfiniteScrollScreenState extends State<InfiniteScrollScreen> {
     scrollController.addListener(() {
       // scrollController.position.pixels; // posicion actual del scroll
       // scrollController.position.maxScrollExtent; // posicion maxima a la que puede llegar el scroll en la pantalla del movil
-      // * Forma de determinar que estamos al final del scroll cuando el usuario desliza (el '500' es el umbral/threshold de margen que damos para que se ejecute esa nueva carga de imagenes)
-      if((scrollController.position.pixels + 500) >= scrollController.position.maxScrollExtent){
+      // * Forma de determinar que estamos al final del scroll cuando el usuario desliza (el '250' es el umbral/threshold de margen que damos para que se ejecute esa nueva carga de imagenes)
+      if((scrollController.position.pixels + 250) >= scrollController.position.maxScrollExtent){
         // Load next page
         loadNextPage();
       }
@@ -55,8 +55,7 @@ class _InfiniteScrollScreenState extends State<InfiniteScrollScreen> {
     // addFiveImages();   
     isLoading = await addFiveImagesAsync(); // * devolverlo a false para la siguiente carga
     setState(() {}); // ! FUNCION QUE ACTUALIZA LOS (stateful) WIDGETS, QUE REENDERIZA LOS WIDGETS de nuevo
-
-    // todo: mover el scroll
+    moveScrolltoBottom();
   }
 
   Future<int> checkImageExists(String imageUrl, int imageID) async {
@@ -108,6 +107,17 @@ class _InfiniteScrollScreenState extends State<InfiniteScrollScreen> {
     // addFiveImages();
     isLoading = await addFiveImagesAsync(); // * devolverlo a false para la siguiente carga
     setState(() {}); // ! FUNCION QUE ACTUALIZA LOS (stateful) WIDGETS, QUE REENDERIZA LOS WIDGETS de nuevo  
+  }
+
+  void moveScrolltoBottom(){
+    // * Solo disparamos el movimiento si el usuario esta cerca del borde (por ejemplo, si mientras cargan las imagenes ha tirado hacia arriba, no queremos obligarle a bajar)
+    if(scrollController.position.pixels + 150 <= scrollController.position.maxScrollExtent) return;
+
+    scrollController.animateTo(
+      scrollController.position.pixels + 150, //posicion a la que queremos mover el scroll (en este caso solo hacemos que se mueva un poco)
+      duration: const Duration(milliseconds: 300), 
+      curve: Curves.fastOutSlowIn
+    );
   }
 
   @override
