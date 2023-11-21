@@ -23,9 +23,9 @@ class _SideMenuState extends State<SideMenu> {
   int navDrawerIndex = 0; // * Saber que opcion del menu de navegacion ha sido seleccionado
 
   // ! Forma de determinar en que plataforma estamos: Linux, Windows, Android, IOs, etc
-  final platform = Platform.isAndroid;
-  final platform1 = Platform.isLinux;
-  final platform2 = Platform.isIOS;
+  // final platform = Platform.isAndroid;
+  // final platform1 = Platform.isLinux;
+  // final platform2 = Platform.isIOS;
 
   @override
   Widget build(BuildContext context) {
