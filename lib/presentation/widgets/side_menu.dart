@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:widgets_riverpod_app/config/menu/menu_items.dart';
@@ -40,7 +38,7 @@ class _SideMenuState extends State<SideMenu> {
 
     final hasNotch = MediaQuery.of(context).viewPadding.top > 35;
 
-    return FadeInLeft( // * Toque que le he dado yo
+    return FadeInLeft( // * Toque que le he dado yo Y SE PUEDE QUITAR ESE WIDGET SI DA PROBLEMAS
       duration: const Duration(milliseconds: 200),
       child: NavigationDrawer(
         selectedIndex: navDrawerIndex,
