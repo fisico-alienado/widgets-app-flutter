@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:widgets_riverpod_app/config/menu/menu_items.dart';
+import 'package:widgets_riverpod_app/presentation/widgets/side_menu.dart';
 
 class HomeScreen extends StatelessWidget {
 
@@ -16,6 +17,7 @@ class HomeScreen extends StatelessWidget {
         // centerTitle: true, // mejor controlarlo desde el appTheme
       ),
       body: const _HomeView(),
+      drawer: const SideMenu()
     );
   }
 }

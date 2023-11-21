@@ -40,7 +40,7 @@ Se implementan widgets profesionalizados que son de uso habitual en aplicaciones
     - Propio
     - De terceros
 
-- **Drawers** (menús laterales)
+- **Drawers (Scaffold (end)drawer)** (Menús de Navegación laterales)
 
 - Gestor de estado **Riverpod** (muy popular y considerado el sucesor espiritual del gestor de estado **Provider**)
 
