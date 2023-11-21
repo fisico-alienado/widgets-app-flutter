@@ -7,7 +7,12 @@ import 'package:animate_do/animate_do.dart';
 
 class SideMenu extends StatefulWidget {
   // ! Estamos utilizando los estados de los widgets como gestores de estado, por ello hay tanto stateful widget. Sino, podrían ser stateless
-  const SideMenu({super.key});
+
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  const SideMenu({
+    super.key, 
+    required this.scaffoldKey
+  });
 
   @override
   State<SideMenu> createState() => _SideMenuState();
@@ -47,6 +52,9 @@ class _SideMenuState extends State<SideMenu> {
           final menuItem = appMenuItems[value]; // Como el menu lateral tiene el mismo orden que appMenuItems, sabemos el valor seleccionado
           // ? Go_router
           context.push(menuItem.link); // Para navigating to a route based on the URL, es decir, el path
+          // ! Para acceder a las variables de un Stateful Widget desde un Stateless widget, tengo que poner 'widget.nombre_propiedad_del_stateful_widget'
+          widget.scaffoldKey.currentState?.closeDrawer();
+
         },
         children: [
           Padding( // Introducido para ver con lidiar con el tema del Notch o isla dinamica de algunos móviles
