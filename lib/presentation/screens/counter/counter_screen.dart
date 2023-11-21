@@ -49,6 +49,7 @@ class CounterScreen extends ConsumerWidget { // ! ConsumerWidget y ConsumerState
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
+            heroTag: "addBtn",
             child: const Icon(Icons.add),
             onPressed: () {
               ref.read(counterProvider.notifier).state++;
@@ -61,6 +62,7 @@ class CounterScreen extends ConsumerWidget { // ! ConsumerWidget y ConsumerState
           const SizedBox(height: 10),
 
           FloatingActionButton(
+            heroTag: "removeBtn", // ! ver comentario final
             child: const Icon(Icons.remove),
             onPressed: () {
               if (clickCounter == 0) return; // QUE NO HAGA NADA MAS SI EL VALOR ES CERO
@@ -74,3 +76,22 @@ class CounterScreen extends ConsumerWidget { // ! ConsumerWidget y ConsumerState
     );
   }
 }
+
+/* Tenía el error:
+
+════════ Exception caught by scheduler library ═════════════════════════════════
+There are multiple heroes that share the same tag within a subtree.
+════════════════════════════════════════════════════════════════════════════════
+
+Buscando encontre que:
+  This error typically occurs when you have multiple Hero widgets with the same tag within the same tree. 
+  In Flutter, Hero widgets are used to create animations between different screens. Each Hero must have a unique non-null 
+  tag within each subtree (typically a PageRoute subtree) for which heroes are to be animated.
+
+  One common scenario where this error might occur is when you have multiple FloatingActionButtons on the same screen. 
+  You can solve this by adding a unique heroTag property to each FloatingActionButton.
+
+Añadiendo 'heroTag' con un nombre cualquiera se soluciona el problema.
+
+
+*/
