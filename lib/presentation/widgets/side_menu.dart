@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:widgets_riverpod_app/config/menu/menu_items.dart';
+import 'package:animate_do/animate_do.dart';
 
 class SideMenu extends StatefulWidget {
   // ! Estamos utilizando los estados de los widgets como gestores de estado, por ello hay tanto stateful widget. Sino, podrían ser stateless
@@ -33,54 +35,61 @@ class _SideMenuState extends State<SideMenu> {
 
     final hasNotch = MediaQuery.of(context).viewPadding.top > 35;
 
-    return NavigationDrawer(
-      selectedIndex: navDrawerIndex,
-      onDestinationSelected: (value) { // cada NavigationDrawerDestination tiene un identificador 'int'
-        setState(() {
-          navDrawerIndex = value;
-        });
-      },
-      children: [
-        Padding( // Introducido para ver con lidiar con el tema del Notch o isla dinamica de algunos móviles
-          padding: EdgeInsets.fromLTRB(28, hasNotch ? 5 : 20, 16, 10),
-          child: const Text('Main')
-        ),
-
-        // ! En la REALIDAD la forma seria un NavigationDrawer.builder() o algo asi que fuese construyendo las opciones desde 'menu_items.dart' para que fuese más mantenible
-        // * ... spread operator
-        // ...appMenuItems.map((item) => NavigationDrawerDestination(
-        //   icon: Icon(item.icon),
-        //   label: Text(item.title)
-        // ),),
-
-        // ? Forma mas artistica de Fernando que la anterior
-        ...appMenuItems
-          .sublist(0,3) // mostrar solo los 3 primeros elementos del menuitems
-          .map((item) => NavigationDrawerDestination(
-            icon: Icon(item.icon),
-            label: Text(item.title)
+    return FadeInLeft( // * Toque que le he dado yo
+      duration: const Duration(milliseconds: 200),
+      child: NavigationDrawer(
+        selectedIndex: navDrawerIndex,
+        onDestinationSelected: (value) { // cada NavigationDrawerDestination tiene un identificador 'int'
+          setState(() {
+            navDrawerIndex = value;
+          });
+    
+          final menuItem = appMenuItems[value]; // Como el menu lateral tiene el mismo orden que appMenuItems, sabemos el valor seleccionado
+          // ? Go_router
+          context.push(menuItem.link); // Para navigating to a route based on the URL, es decir, el path
+        },
+        children: [
+          Padding( // Introducido para ver con lidiar con el tema del Notch o isla dinamica de algunos móviles
+            padding: EdgeInsets.fromLTRB(28, hasNotch ? 5 : 20, 16, 10),
+            child: const Text('Main')
           ),
-        ),
-
-        const Padding(
-          padding: EdgeInsets.fromLTRB(28, 16, 16, 10),
-          child: Divider(),
-        ),
-
-        const Padding(
-          padding: EdgeInsets.fromLTRB(28, 10, 16, 10),
-          child: Text('More options')
-        ),
-
-        ...appMenuItems
-          .sublist(3) // mostrar del 3er elemento del menuitems al final
-          .map((item) => NavigationDrawerDestination(
-            icon: Icon(item.icon),
-            label: Text(item.title)
+    
+          // ! En la REALIDAD la forma seria un NavigationDrawer.builder() o algo asi que fuese construyendo las opciones desde 'menu_items.dart' para que fuese más mantenible
+          // * ... spread operator
+          // ...appMenuItems.map((item) => NavigationDrawerDestination(
+          //   icon: Icon(item.icon),
+          //   label: Text(item.title)
+          // ),),
+    
+          // ? Forma mas artistica de Fernando que la anterior
+          ...appMenuItems
+            .sublist(0,3) // mostrar solo los 3 primeros elementos del menuitems
+            .map((item) => NavigationDrawerDestination(
+              icon: Icon(item.icon),
+              label: Text(item.title),
+            ),
           ),
-        ),
-
-      ],
+    
+          const Padding(
+            padding: EdgeInsets.fromLTRB(28, 16, 16, 10),
+            child: Divider(),
+          ),
+    
+          const Padding(
+            padding: EdgeInsets.fromLTRB(28, 10, 16, 10),
+            child: Text('More options')
+          ),
+    
+          ...appMenuItems
+            .sublist(3) // mostrar del 3er elemento del menuitems al final
+            .map((item) => NavigationDrawerDestination(
+              icon: Icon(item.icon),
+              label: Text(item.title)
+            ),
+          ),
+    
+        ],
+      ),
     );
   }
 }

@@ -67,7 +67,7 @@ class _CustomListTile extends StatelessWidget {
         // Navigator.pushNamed(context, menuItem.link);
 
         // ? Go_router
-        // context.go(menuItem.link); // Para app webs mejor esto
+        // context.go(menuItem.link); //* Para app webs mejor esto
         // context.pushNamed(ButtonsScreen.name); context.pushNamed(menuItem.name); // Para navegar con nombre de rutas, tendriamos que añadir al menu items el 'name' de la ruta como opcion
         context.push(menuItem.link); // Para navigating to a route based on the URL, es decir, el path
       },
