@@ -71,8 +71,13 @@ class _AppTutorialScreenState extends State<AppTutorialScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    // ! Lo ideal seria eliminar los Stateful Widgets y convertirlos a Riverpod ConsumerWidgets, pero aprovecho que estan como stateful para hacer el cambio de Brigthness con esta configuracion
+    final colors = Theme.of(context).colorScheme; // Esto significa: vete para atras en los widgets padres hasta que encuentres el Theme y aplicalo. Para esto esta el argumento "BuildContext context" en todos los Widgets
+                                                  // con .colorScheme accedemos a todo lo definido en AppTheme()
+
     return Scaffold( // Poniendo Scaffold ya estamos indicando que es otra pantalla
-    backgroundColor: Colors.white, // porque el fondo de las imagenes es blanco
+      backgroundColor: colors.brightness == Brightness.light ? Colors.white : colors.background, // porque el fondo de las imagenes es blanco
       body: Stack(
         children: [
           PageView(

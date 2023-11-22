@@ -33,4 +33,14 @@ class AppTheme {
       brightness: isDarkMode ? Brightness.dark : Brightness.light
     );
   }
+
+  // ! Es una forma de hacer una copia de clases (del AppTheme actual en este caso)
+  //! De esta manera podemos mantener la clase (AppTheme) inmutable y, cuando se quiera cambiar algo, se hace una copia de ella
+  AppTheme copyWith({
+    int? selectedColor,
+    bool? isDarkMode
+  }) => AppTheme(
+    selectedColor: selectedColor ?? this.selectedColor, // si no me mandan valor, usa el que aparece en AppTheme por defecto
+    isDarkMode: isDarkMode ?? this.isDarkMode // idem
+  );
 }
