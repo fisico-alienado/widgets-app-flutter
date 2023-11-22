@@ -22,15 +22,24 @@ class MainApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final int selectedColor = ref.watch( selectedColorProvider );
-    final isDarkMode = ref.watch( isDarkModeProvider );
+    final AppTheme appTheme = ref.watch( themeNotifierProvider );
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Widgets App',
-      theme: AppTheme(selectedColor: selectedColor, isDarkMode: isDarkMode).getTheme(),
+      theme: appTheme.getTheme(),
       routerConfig: appRouter,
     );
+    // ? Forma válida antes de implementar el StateNotifier y StateNotifierProvider de Riverpod. Se puede descomentar para ver que sigue funcionando
+    // final int selectedColor = ref.watch( selectedColorProvider );
+    // final isDarkMode = ref.watch( isDarkModeProvider );
+
+    // return MaterialApp.router(
+    //   debugShowCheckedModeBanner: false,
+    //   title: 'Flutter Widgets App',
+    //   theme: AppTheme(selectedColor: selectedColor, isDarkMode: isDarkMode).getTheme(),
+    //   routerConfig: appRouter,
+    // );
     // ? Caso inicial sin Go_router
     // return MaterialApp(
     //   debugShowCheckedModeBanner: false,
