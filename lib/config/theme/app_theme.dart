@@ -15,9 +15,11 @@ const List<Color> colorList = [
 
 class AppTheme {
   final int selectedColor;
+  final bool isDarkMode;
 
   AppTheme({
-    this.selectedColor = 0
+    this.selectedColor = 0,
+    this.isDarkMode = false,
   }) : assert( selectedColor >= 0 && selectedColor <= colorList.length - 1, 
               'Color must be between 0 and ${colorList.length}');
 
@@ -28,8 +30,7 @@ class AppTheme {
       appBarTheme: const AppBarTheme(
         centerTitle: false
       ),
-      // brightness: Brightness.dark
-      // brightness: Brightness.light
+      brightness: isDarkMode ? Brightness.dark : Brightness.light
     );
   }
 }
